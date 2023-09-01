@@ -2,10 +2,10 @@ param servicePrincipalId string
 param roleId string
 param principalType string
 
-resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-01-preview' existing = {
-  scope: resourceGroup()
-  name: roleId
-}
+// resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-01-preview' existing = {
+//   scope: resourceGroup()
+//   name: roleId
+// }
 
 resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: 'string'
@@ -17,6 +17,6 @@ resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     // description: 'string'
     principalId: servicePrincipalId
     principalType: principalType
-    roleDefinitionId: roleDefinition.id
+    roleDefinitionId: roleId
   }
 }
