@@ -8,13 +8,18 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+
+    - uses: actions/checkout@main
     - name: Log in with Azure
+
       uses: azure/login@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         enable-AzPSSession: true
-    - name: Azure PowerShell Action
-      uses: Azure/powershell@v1
+
+    - name: 'Deploy Infrastructure'
+      uses: azure/arm-deploy@v1
       with:
-        inlineScript: Get-AzResourceGroup -Name "BicepModules"
-        azPSVersion: "latest"
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: 'BicepModules'
+        template: src/BicepRepository.bicep
