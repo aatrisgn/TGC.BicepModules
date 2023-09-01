@@ -11,7 +11,7 @@ param(
 function CopyFiles{
     param( [string]$source )
 
-    $target = $targetDirectory + $source
+    $target = "$targetDirectory/$source"
 
     New-Item -Force $target
     copy-item $source $target -Force
