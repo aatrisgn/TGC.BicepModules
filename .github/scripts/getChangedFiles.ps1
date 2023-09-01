@@ -16,7 +16,7 @@ function CopyFiles{
 }
 
 If ($buildOnlychangedModules -eq $true) {
-    $changes = git diff --name-only HEAD HEAD~2
+    $changes = git diff --name-only --relative HEAD HEAD~2
 }
 else {
     $changes = Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
