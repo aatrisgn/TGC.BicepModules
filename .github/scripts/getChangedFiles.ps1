@@ -11,10 +11,8 @@ param(
 function CopyFiles{
     param( [string]$source )
 
-    $target = "$targetDirectory/$source"
-
-    New-Item -Force $target
-    copy-item $source $target -Force
+    New-Item -Force $targetDirectory
+    copy-item $source $targetDirectory -Force
 }
 
 If ($buildOnlychangedModules -eq $true) {
