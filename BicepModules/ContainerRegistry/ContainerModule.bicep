@@ -1,5 +1,5 @@
 param name string
-param location string
+param location string = resourceGroup().location
 
 @allowed([
   'Basic'
@@ -30,3 +30,4 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-06-01-preview' = {
 }
 
 output registryId string = acr.id
+output azureRegistryUrl string = acr.properties.loginServer

@@ -5,13 +5,13 @@ on:
 name: 'Container Registry Deploymemt'
 
 jobs:
-  build-and-deploy:
+  deploy-infrastructure:
     runs-on: ubuntu-latest
     steps:
 
     - uses: actions/checkout@main
-    - name: Log in with Azure
 
+    - name: Log in with Azure
       uses: azure/login@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
@@ -19,8 +19,40 @@ jobs:
 
     - name: 'Deploy Infrastructure'
       uses: azure/arm-deploy@v1
+      id: deploy
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: 'BicepModules'
         template: src/BicepRepository.bicep
         parameters: servicePrincipalId=${{ secrets.AZURE_SPN_OBJECTID }}
+
+    - run: echo ${{ steps.deploy.outputs.azureRegistryUrl }}
+
+    outputs:
+      azureRegistryUrl: ${{ steps.deploy.outputs.azureRegistryUrl }}
+  
+  build-and-deploy-modules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Log in with Azure
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          enable-AzPSSession: true
+
+      - name: Get Changed modules
+        shell: pwsh
+        run: |
+          .github/scripts/getChangedFiles.ps1 -buildOnlychangedModules $true -modulesDirectory '${{ github.workspace }}/BicepModules' -targetDirectory '${{ runner.temp }}/UpdatedModules'
+
+      - name: Build modules
+        shell: pwsh
+        run: |
+          .github/scripts/buildBicepFiles.ps1 -targetDirectory '${{ runner.temp }}/UpdatedModules'
+
+      - name: Publish Modules
+        shell: pwsh
+        run: |
+          .github/scripts/pushModulesToRegistry.ps1 -targetDirectory '${{ runner.temp }}/UpdatedModules' -registryServer ${{ needs.deploy-infrastructure.outputs.azureRegistryUrl }}
