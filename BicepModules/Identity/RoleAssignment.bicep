@@ -8,7 +8,7 @@ resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-01-prev
 }
 
 resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: 'string'
+  name: guid(resourceGroup().id, servicePrincipalId, roleId)
   scope: resourceGroup() //resourceSymbolicName or tenant()
   properties: {
     //condition: 'string'
@@ -17,6 +17,6 @@ resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     // description: 'string'
     principalId: servicePrincipalId
     principalType: principalType
-    roleDefinitionId: guid(roleDefinition.id)
+    roleDefinitionId: roleDefinition.id
   }
 }
