@@ -21,6 +21,8 @@ function CopyFiles{
     copy-item $source $target -Force
 }
 
+Set-Location $modulesDirectory
+
 If ($buildOnlychangedModules -eq $true) {
     $changes = git diff --name-only --relative --diff-filter AMR HEAD^ HEAD .
 }
