@@ -24,13 +24,16 @@ function CopyFiles{
 Set-Location $modulesDirectory
 
 If ($buildOnlychangedModules -eq $true) {
-    $changes = git diff --name-only --relative --diff-filter AMR HEAD^ HEAD .
+    $changes = git diff --name-only HEAD HEAD~2
 }
 else {
     $changes = Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
 }
 
+Write-Host $changes
 $changes
+
+
 if ($changes -is [string]){ 
     CopyFiles $changes 
 }
