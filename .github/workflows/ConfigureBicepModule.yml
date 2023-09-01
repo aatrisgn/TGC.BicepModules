@@ -5,7 +5,7 @@ on:
 name: 'Container Registry Deploymemt'
 
 jobs:
-  deploy-infrastructure:
+  deploy_infrastructure:
     runs-on: ubuntu-latest
     steps:
 
@@ -33,6 +33,8 @@ jobs:
   
   build-and-deploy-modules:
     runs-on: ubuntu-latest
+    needs: [deploy_infrastructure]
+
     steps:
       - uses: actions/checkout@main
 
@@ -55,4 +57,4 @@ jobs:
       - name: Publish Modules
         shell: pwsh
         run: |
-          .github/scripts/pushModulesToRegistry.ps1 -targetDirectory '${{ runner.temp }}/UpdatedModules' -registryServer ${{ needs.deploy-infrastructure.outputs.azureRegistryUrl }}
+          .github/scripts/pushModulesToRegistry.ps1 -targetDirectory '${{ runner.temp }}/UpdatedModules' -registryServer ${{ needs.deploy_infrastructure.outputs.azureRegistryUrl }}
