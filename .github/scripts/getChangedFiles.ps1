@@ -8,10 +8,6 @@ param(
      [string]$targetDirectory
 )
 
-Write-Host "BuildOnlyChangedModules: $buildOnlychangedModules"
-Write-Host "modulesDirectory: $modulesDirectory"
-Write-Host "targetDirectory: $targetDirectory"
-
 function CopyFiles{
     param( [string]$source )
 
@@ -21,8 +17,6 @@ function CopyFiles{
     copy-item $source $target -Force
 }
 
-Set-Location $modulesDirectory
-
 If ($buildOnlychangedModules -eq $true) {
     $changes = git diff --name-only HEAD HEAD~2
 }
@@ -31,8 +25,6 @@ else {
 }
 
 Write-Host $changes
-$changes
-
 
 if ($changes -is [string]){ 
     CopyFiles $changes 
