@@ -6,9 +6,6 @@ param(
      [string]$registryServer
 )
 
-Write-Host "targetDirectory: $targetDirectory"
-Write-Host "registryServer: $registryServer"
-
 az bicep install
 az bicep version
 
