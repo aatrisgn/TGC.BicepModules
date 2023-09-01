@@ -4,7 +4,7 @@ module containerRegistry '../BicepModules/Container/ContainerModule.bicep' = {
    name: 'ContainerRegistry'
    params:{
     location: location
-    name: 'BicepModulesRegistry'
+    name: 'TGCBicepModulesRegistry'
     sku: 'Basic'
     publicNetworkAccess: 'Enabled'
    }
