@@ -37,6 +37,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
 
       - name: Log in with Azure
         uses: azure/login@v1
