@@ -1,5 +1,6 @@
 param servicePrincipalId string
 param roleId string
+param principalType string
 
 resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-01-preview' existing = {
   scope: resourceGroup()
@@ -15,7 +16,7 @@ resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     // delegatedManagedIdentityResourceId: 'string'
     // description: 'string'
     principalId: servicePrincipalId
-    // principalType: 'string'
+    principalType: principalType
     roleDefinitionId: roleDefinition.id
   }
 }

@@ -16,6 +16,7 @@ module acrPushRole '../BicepModules/Identity/RoleAssignment.bicep' = {
   params:{
     roleId: '8311e382-0749-4cb8-b61a-304f252e45ec'
     servicePrincipalId: servicePrincipalId
+    principalType: 'ServicePrincipal'
   }
 }
 
@@ -24,5 +25,6 @@ module acrPullRole '../BicepModules/Identity/RoleAssignment.bicep' = {
   params:{
     roleId: '7f951dda-4ed3-4680-a7ca-43fe172d538d'
     servicePrincipalId: servicePrincipalId
+    principalType: 'ServicePrincipal'
   }
 }
