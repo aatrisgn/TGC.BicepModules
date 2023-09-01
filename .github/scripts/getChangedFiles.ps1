@@ -10,10 +10,10 @@ param(
 
 function CopyFiles{
     param( [string]$source )
-
-    New-Item -Force $targetDirectory
-    copy-item $source $targetDirectory -Force
+    copy-item $source "$targetDirectory/$source" -Force
 }
+
+New-Item -ItemType Directory -Force $targetDirectory
 
 If ($buildOnlychangedModules -eq $true) {
     $changes = git diff --name-only --relative HEAD HEAD~2
