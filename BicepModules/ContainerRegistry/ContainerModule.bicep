@@ -1,4 +1,6 @@
+@description('Name of container registry.')
 param name string
+@description('Optional. Azure location of Container Registry.')
 param location string = resourceGroup().location
 
 @allowed([
