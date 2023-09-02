@@ -27,5 +27,8 @@ resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {
   } 
 }
 
+@description('ID of Azure Static Web App.')
 output staticWebAppId string = staticWebApp.id
+
+@description('Name of Azure Static Web App.')
 output staticWebAppName string = staticWebApp.name

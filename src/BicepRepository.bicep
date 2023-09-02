@@ -1,7 +1,7 @@
 param servicePrincipalId string
 param location string = resourceGroup().location
 
-module containerRegistry '../BicepModules/ContainerRegistry/ContainerModule.bicep' = {
+module containerRegistry '../BicepModules/ContainerRegistry/azureContainerRegistry.bicep' = {
    name: 'ContainerRegistry'
    params:{
     location: location
@@ -11,7 +11,7 @@ module containerRegistry '../BicepModules/ContainerRegistry/ContainerModule.bice
    }
 }
 
-module acrPushRole '../BicepModules/roleAssignments/RoleAssignment.bicep' = {
+module acrPushRole '../BicepModules//Authorization/RoleAssignment.bicep' = {
   name: 'acrPushRole'
   params:{
     roleId: '8311e382-0749-4cb8-b61a-304f252e45ec'
@@ -20,7 +20,7 @@ module acrPushRole '../BicepModules/roleAssignments/RoleAssignment.bicep' = {
   }
 }
 
-module acrPullRole '../BicepModules/roleAssignments/RoleAssignment.bicep' = {
+module acrPullRole '../BicepModules/Authorization/RoleAssignment.bicep' = {
   name: 'acrPullRole'
   params:{
     roleId: '7f951dda-4ed3-4680-a7ca-43fe172d538d'
