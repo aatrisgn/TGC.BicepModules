@@ -15,8 +15,6 @@ function CopyFiles{
     copy-item $source "$targetDirectory/$source" -Force
 }
 
-New-Item -ItemType Directory -Force $targetDirectory
-
 If ($buildOnlychangedModules -eq $true) {
     $changes = git diff --name-only --relative HEAD HEAD~2
 }
@@ -24,7 +22,7 @@ else {
     $changes = Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
 }
 
-Write-Host $changes
+Write-Host "Files detected for change: $changes"
 
 if ($changes -is [string]){ 
     CopyFiles $changes 
@@ -38,3 +36,5 @@ else {
         }
     }
 }
+
+Get-ChildItem -Path $targetDirectory -Recurse

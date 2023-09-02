@@ -1,3 +1,4 @@
+//version:v1
 @description('Name for the static web app resource.')
 param staticSiteName string
 
@@ -7,7 +8,7 @@ param tags object = {}
 @description('SKU object for static web app.')
 param sku object = {}
 
-@description('Optional. Location for resources. Default is resource group location')
+@description('Optional. Default is location of resource group. Location for resources.')
 param location string = resourceGroup().location
 
 resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {

@@ -1,5 +1,7 @@
+//version:v1
 @description('Name of container registry.')
 param name string
+
 @description('Optional. Azure location of Container Registry.')
 param location string = resourceGroup().location
 
@@ -9,12 +11,12 @@ param location string = resourceGroup().location
   'Premium'
 ])
 param sku string
+
 @allowed([
   'Enabled'
   'Disabled'
 ])
 param publicNetworkAccess string
-
 
 resource acr 'Microsoft.ContainerRegistry/registries@2023-06-01-preview' = {
   name: name
