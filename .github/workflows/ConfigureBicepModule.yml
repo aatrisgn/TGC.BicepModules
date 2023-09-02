@@ -47,7 +47,7 @@ jobs:
     - name: Get Changed modules
       shell: pwsh
       run: |
-        .github/scripts/getChangedFiles.ps1 -modulesDirectory '${{ github.workspace }}' -targetDirectory '${{ runner.temp }}/UpdatedModules'
+        .github/scripts/getChangedFiles.ps1 -modulesDirectory '${{ github.workspace }}/BicepModules' -targetDirectory '${{ runner.temp }}/UpdatedModules'
 
     - name: Build modules
       shell: pwsh
