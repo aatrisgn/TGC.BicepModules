@@ -10,6 +10,8 @@ param(
 
 function CopyFiles{
     param( [string]$source )
+    $filePath = "$targetDirectory/$source"
+    New-Item -Force $filePath
     copy-item $source "$targetDirectory/$source" -Force
 }
 
