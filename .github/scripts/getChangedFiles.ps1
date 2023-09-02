@@ -1,8 +1,6 @@
 [CmdletBinding()]
 param(
      [Parameter()]
-     [bool]$buildOnlychangedModules,
-     [Parameter()]
      [string]$modulesDirectory,
      [Parameter()]
      [string]$targetDirectory
@@ -15,12 +13,7 @@ function CopyFiles{
     copy-item $source "$targetDirectory/$source" -Force
 }
 
-If ($buildOnlychangedModules -eq $true) {
-    $changes = git diff --name-only --relative HEAD HEAD~2
-}
-else {
-    $changes = Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
-}
+$changes = Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
 
 Write-Host "Files detected for change: $changes"
 

@@ -13,7 +13,6 @@ Get-ChildItem -Path $targetDirectory -Recurse
 $bicepFiles = Get-ChildItem $targetDirectory -Filter "*.bicep" -Recurse
 
 Foreach ($file in $bicepFiles) {
-    $firstLine = Get-Content C:\fso\batteryReport.txt -First 1
     $folderName = (($file.FullName -split '/')[-2]).tolower()
     $fileName = (Split-Path -Path $file.FullName -LeafBase).tolower()
 
