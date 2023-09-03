@@ -2,7 +2,7 @@ on:
   push:
   workflow_dispatch:
 
-name: 'Container Registry Deploymemt'
+name: 'Test Bicep Deployments'
 
 jobs:
   deploy_infrastructure:
@@ -17,11 +17,11 @@ jobs:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         enable-AzPSSession: true
 
-    - name: 'Deploy Infrastructure'
-      uses: azure/arm-deploy@v1
-      id: deploy
-      with:
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: 'BicepModules'
-        template: src/TestDeployment.bicep
-        parameters: servicePrincipalId=${{ secrets.AZURE_SPN_OBJECTID }}
+# - name: 'Deploy Infrastructure'
+#   uses: azure/arm-deploy@v1
+#   id: deploy
+#   with:
+#     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+#     resourceGroupName: 'BicepModules'
+#     template: src/TestDeployment.bicep
+#     parameters: servicePrincipalId=${{ secrets.AZURE_SPN_OBJECTID }}

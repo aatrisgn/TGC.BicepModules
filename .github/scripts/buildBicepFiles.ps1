@@ -18,7 +18,7 @@ Foreach ($file in $bicepFiles) {
         $line = $lines[$i]
 
         # Check if the current line contains "@description("
-        if ($line -match '@description\(') {
+        if ($line.StartsWith('@description\(')) {
             $descriptionLine = $line
             continue
         }
