@@ -29,5 +29,3 @@ else {
         }
     }
 }
-
-Get-ChildItem -Path $targetDirectory -Recurse

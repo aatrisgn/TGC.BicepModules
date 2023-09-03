@@ -27,6 +27,7 @@ Foreach ($file in $bicepFiles) {
         if (($line -match '^param|^output') -and ($descriptionLine -ne $null)) {
             Write-Host "Found line: $line"
             Write-Host "Description line: $descriptionLine"
+            $descriptionLine = $null
             # You can add your desired actions or logic here
         }
 
