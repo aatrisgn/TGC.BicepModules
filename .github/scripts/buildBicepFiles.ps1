@@ -12,6 +12,8 @@ Foreach ($file in $bicepFiles) {
     write-host "Building: $($file.FullName)"
     az bicep build --file $file.FullName
 
+    $lines = Get-Content -Path $file.FullName
+
     $descriptionLine = $null
 
     for ($i = 0; $i -lt $lines.Count; $i++) {
@@ -32,7 +34,7 @@ Foreach ($file in $bicepFiles) {
         }
 
         if (($line -match '^param|^output') -and ($descriptionLine -eq $null)) {
-            throw "Found line: $line but no description for parameter/oútput"            
+            throw "Found line: $line but no description for parameter/output. Each parameter/output needs to have @description as its nearest decorator."            
         }
     }
 }
