@@ -19,7 +19,7 @@ Foreach ($file in $bicepFiles) {
     for ($i = 0; $i -lt $lines.Count; $i++) {
         $line = $lines[$i]
 
-        if ($line.StartsWith('@description\(')) {
+        if ($line -match '^@description\(') {
             $descriptionLine = $line
             continue
         }
