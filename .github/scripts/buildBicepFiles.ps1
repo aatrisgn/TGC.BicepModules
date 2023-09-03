@@ -19,21 +19,19 @@ Foreach ($file in $bicepFiles) {
     for ($i = 0; $i -lt $lines.Count; $i++) {
         $line = $lines[$i]
 
-        # Check if the current line contains "@description("
         if ($line.StartsWith('@description\(')) {
             $descriptionLine = $line
             continue
         }
 
-        # Check if the current line starts with "param" or "output" and the previous line had "@description("
-        if (($line -match '^param|^output') -and ($descriptionLine -ne $null)) {
+        if (($line -match '^param|^output') -and ( $null -ne $descriptionLine )) {
             Write-Host "Found line: $line"
             Write-Host "Description line: $descriptionLine"
             $descriptionLine = $null
-            # You can add your desired actions or logic here
+            continue
         }
 
-        if (($line -match '^param|^output') -and ($descriptionLine -eq $null)) {
+        if (($line -match '^param|^output') -and ($null -eq $descriptionLine)) {
             throw "Found line: $line but no description for parameter/output. Each parameter/output needs to have @description as its nearest decorator."            
         }
     }
