@@ -9,7 +9,6 @@ param(
 az bicep install
 az bicep version
 
-Get-ChildItem -Path $targetDirectory -Recurse
 $bicepFiles = Get-ChildItem $targetDirectory -Filter "*.bicep" -Recurse
 
 Foreach ($file in $bicepFiles) {
@@ -21,5 +20,6 @@ Foreach ($file in $bicepFiles) {
 
     $targetRepository = "/bicep/modules/$folderName/$fileName"
     write-host "pushing: $fileName with Version: $buildNumber"
+
     az bicep publish --file $file.FullName --target br:$($registryServer)$($targetRepository):$buildNumber
 }
