@@ -35,5 +35,7 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-06-01-preview' = {
   }
 }
 
+@description('[string] ID of created Container Registry.')
 output registryId string = acr.id
+@description('[string] Unique hostname of Azure Container Registry.')
 output azureRegistryUrl string = acr.properties.loginServer

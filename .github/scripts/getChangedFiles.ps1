@@ -9,8 +9,8 @@ param(
 function CopyFiles{
     param( [string]$source )
     $filePath = "$targetDirectory/$source"
-    New-Item -Force $filePath
-    copy-item $source "$targetDirectory/$source" -Force
+    [Void] (New-Item -Force $filePath)
+    Copy-Item $source "$targetDirectory/$source" -Force
 }
 
 $changes = Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
