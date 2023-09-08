@@ -32,7 +32,7 @@ Foreach ($file in $bicepFiles) {
         }
 
         if (($line -match '^param|^output') -and ($null -eq $descriptionLine)) {
-            throw "Found line: $line (line $i ) in $($file.FullName) but no description for parameter/output. Each parameter/output needs to have @description as its nearest decorator."            
+            throw "Found line: $line (line $($i + 1 ) ) in $($file.FullName) but no description for parameter/output. Each parameter/output needs to have @description as its nearest decorator."
         }
     }
 }

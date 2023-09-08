@@ -17,7 +17,7 @@ param sku string = 'Basic'
   'Enabled'
   'Disabled'
 ])
-// @description('Optional. Whether or not the container registry should be publicly accessible. Default is \'disabled\'.')
+@description('Optional. Whether or not the container registry should be publicly accessible. Default is \'disabled\'.')
 param publicNetworkAccess string = 'Disabled'
 
 resource acr 'Microsoft.ContainerRegistry/registries@2023-06-01-preview' = {
