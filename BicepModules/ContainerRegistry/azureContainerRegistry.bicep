@@ -10,13 +10,15 @@ param location string = resourceGroup().location
   'Standard'
   'Premium'
 ])
-param sku string
+@description('Optional. SKU of Azure Container Registry. Default is \'basic\'.')
+param sku string = 'Basic'
 
 @allowed([
   'Enabled'
   'Disabled'
 ])
-param publicNetworkAccess string
+@description('Optional. Whether or not the container registry should be publicly accessible. Default is \'disabled\'.')
+param publicNetworkAccess string = 'Disabled'
 
 resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   name: name
@@ -33,5 +35,7 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   }
 }
 
+@description('[string] ID of created Container Registry.')
 output registryId string = acr.id
+@description('[string] Unique hostname of Azure Container Registry.')
 output azureRegistryUrl string = acr.properties.loginServer

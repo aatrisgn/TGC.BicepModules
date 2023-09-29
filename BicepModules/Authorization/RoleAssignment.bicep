@@ -5,12 +5,12 @@ param servicePrincipalId string
 @description('ID of the role the service principal should be assigned')
 param roleId string
 
-@description('Optional. Default is \'ServicePrincipal\'. Type of principal the role should be assigned.')
 @allowed(['Device'
   'ForeignGroup'
   'Group'
   'ServicePrincipal'
   'User'])
+@description('Optional. Default is \'ServicePrincipal\'. Type of principal the role should be assigned.')
 param principalType string = 'ServicePrincipal'
 
 resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
