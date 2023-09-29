@@ -53,7 +53,7 @@ function DetectVersion()
     }
 }
 
-$changes = (git diff --name-only --relative HEAD HEAD~2) # Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
+$changes = (git diff --name-only --relative HEAD HEAD~1)
 
 Write-Host "Files detected for change: $changes"
 
