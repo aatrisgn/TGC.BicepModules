@@ -11,6 +11,26 @@ module containerRegistry '../BicepModules/ContainerRegistry/azureContainerRegist
    }
 }
 
+resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
+  name: containerRegistry.name
+}
+
+resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
+  scope: acr
+  name: 'acdd72a7-3385-48ef-bd42-f606fba81ae7'
+}
+
+resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(resourceGroup().id, servicePrincipalId, roleDefinition.id)
+  scope: resourceGroup()
+  properties: {
+    principalId: servicePrincipalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: roleDefinition.id
+  }
+}
+
+
 module acrPushRole '../BicepModules//Authorization/RoleAssignment.bicep' = {
   name: 'acrPushRole'
   params:{

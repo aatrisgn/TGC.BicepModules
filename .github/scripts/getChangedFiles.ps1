@@ -22,7 +22,7 @@ function DetectVersion()
 
     if($source -like "*.bicep*"){
         # Split the string by "/"
-        $parts = $inputString -split '/'
+        $parts = $source -split '/'
 
         # Get the last two values
         $lastTwoValues = $parts[-2], $parts[-1]
