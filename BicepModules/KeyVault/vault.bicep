@@ -14,8 +14,6 @@ param tenantId string = subscription().tenantId
 @description('Optional. Tags for the keyvault.')
 param tags object = {}
 
-
-
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: name
   location: location
