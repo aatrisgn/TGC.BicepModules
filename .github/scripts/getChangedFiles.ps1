@@ -32,11 +32,10 @@ function DetectVersion()
         # Remove file extension from the last value
         $lastValueWithoutExtension = $lastTwoValues[-1] -replace '\..*'
 
-        Write-Host "Executing az acr repository show --name $acrName --repository 'bicep/modules/$($parts[-2].toLower())/$($lastValueWithoutExtension.toLower())'"
-
-        $moduleName = "bicep/modules/$($parts[-2])/$lastValueWithoutExtension"
+        $moduleName = "bicep/modules/$($parts[-2].toLower())/$($lastValueWithoutExtension.toLower())"
         
         if($allACRPackages -contains $moduleName){
+            Write-Host "Executing az acr repository show --name $acrName --repository $moduleName"
             $existingModule = (az acr repository show --name $acrName --repository $moduleName) | ConvertFrom-Json
             $existingModule
             $currentModuleVersion = $existingModule.tagCount
