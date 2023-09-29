@@ -13,7 +13,6 @@ param roleId string
 @description('Optional. Default is \'ServicePrincipal\'. Type of principal the role should be assigned.')
 param principalType string = 'ServicePrincipal'
 
-
 resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   scope: resourceGroup()
   name: roleId

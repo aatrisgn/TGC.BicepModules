@@ -56,8 +56,6 @@ function DetectVersion()
 
 $changes = (git diff --name-only --relative HEAD HEAD~2) # Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
 
-Authorization/RoleAssignment.bicep
-
 Write-Host "Files detected for change: $changes"
 
 if ($changes -is [string]){ 
