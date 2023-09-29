@@ -20,7 +20,7 @@ function DetectVersion()
 {
     param( [string]$source )
 
-    if($source -like "*.bicep*"){
+    if(($source -like "*.bicep*") -and ($source -like "*BicepModules*")){
         # Split the string by "/"
         $parts = $source -split '/'
 
@@ -30,7 +30,7 @@ function DetectVersion()
         # Remove file extension from the last value
         $lastValueWithoutExtension = $lastTwoValues[-1] -replace '\..*'
 
-        Write-Host "Executing az acr repository show --name $acrName --repository \"bicep/modules/$($parts[-2])/$lastValueWithoutExtension\""
+        Write-Host "Executing az acr repository show --name $acrName --repository 'bicep/modules/$($parts[-2].toLower())/$($lastValueWithoutExtension.toLower())'"
 
         $existingModule = (az acr repository show --name $acrName --repository "bicep/modules/$($parts[-2])/$lastValueWithoutExtension") | ConvertFrom-Json
 
