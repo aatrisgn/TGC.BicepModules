@@ -43,7 +43,7 @@ function DetectVersion()
             $firstLine = Get-Content $source -First 1
             $buildNumber = $firstLine.substring($firstLine.Length -2)
 
-            if($currentModuleVersion -eq "v$buildNumber"){
+            if($buildNumber -eq "v$currentModuleVersion"){
                 throw "Module has changed but file version has not been updated."
             }
 
