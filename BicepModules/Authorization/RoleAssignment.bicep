@@ -13,7 +13,7 @@ param roleId string
   'User'])
 param principalType string = 'ServicePrincipal'
 
-resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-01-preview' existing = {
+resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   scope: resourceGroup()
   name: roleId
 }

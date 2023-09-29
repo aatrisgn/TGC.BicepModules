@@ -18,7 +18,7 @@ param sku string
 ])
 param publicNetworkAccess string
 
-resource acr 'Microsoft.ContainerRegistry/registries@2023-06-01-preview' = {
+resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   name: name
   location: location
   identity:{
