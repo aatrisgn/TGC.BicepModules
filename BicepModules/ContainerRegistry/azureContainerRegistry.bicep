@@ -1,4 +1,4 @@
-//version:v1
+//version:v2
 @description('Name of container registry.')
 param name string
 
@@ -39,3 +39,5 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
 output registryId string = acr.id
 @description('[string] Unique hostname of Azure Container Registry.')
 output azureRegistryUrl string = acr.properties.loginServer
+@description('[string] Unique hostname of Azure Container Registry.')
+output azureRegistryName string = acr.name

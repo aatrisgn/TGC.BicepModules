@@ -30,3 +30,4 @@ module acrPullRole '../BicepModules/Authorization/RoleAssignment.bicep' = {
 }
 
 output azureRegistryUrl string = containerRegistry.outputs.azureRegistryUrl
+output azureRegistryName string = containerRegistry.outputs.azureRegistryName

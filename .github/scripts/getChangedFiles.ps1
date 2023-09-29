@@ -20,7 +20,7 @@ function DetectVersion()
 {
     param( [string]$source )
 
-    if($source -contains ".bicep"){
+    if($source -like "*.bicep*"){
         # Split the string by "/"
         $parts = $inputString -split '/'
 

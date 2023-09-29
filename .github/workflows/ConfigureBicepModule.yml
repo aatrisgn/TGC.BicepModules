@@ -28,6 +28,7 @@ jobs:
 
     outputs:
       azureRegistryUrl: ${{ steps.deploy.outputs.azureRegistryUrl }}
+      azureRegistryName: ${{ steps.deploy.outputs.azureRegistryName }}
 
   build-and-deploy-modules:
     runs-on: ubuntu-latest
@@ -47,7 +48,7 @@ jobs:
     - name: Get Changed modules
       shell: pwsh
       run: |
-        .github/scripts/getChangedFiles.ps1 -modulesDirectory '${{ github.workspace }}/BicepModules' -targetDirectory '${{ runner.temp }}/UpdatedModules'
+        .github/scripts/getChangedFiles.ps1 -modulesDirectory '${{ github.workspace }}/BicepModules' -targetDirectory '${{ runner.temp }}/UpdatedModules' -acrName ${{ needs.deploy_infrastructure.outputs.azureRegistryName }}
 
     - name: Build modules
       shell: pwsh
