@@ -30,9 +30,7 @@ function DetectVersion()
         # Remove file extension from the last value
         $lastValueWithoutExtension = $lastTwoValues[-1] -replace '\..*'
 
-        # Output the results
-        Write-Host "Last two values: $($lastTwoValues -join '/')"
-        Write-Host "Last value without extension: $lastValueWithoutExtension"
+        Write-Host "Executing az acr repository show --name $acrName --repository \"bicep/modules/$($parts[-2])/$lastValueWithoutExtension\""
 
         $existingModule = (az acr repository show --name $acrName --repository "bicep/modules/$($parts[-2])/$lastValueWithoutExtension") | ConvertFrom-Json
 
