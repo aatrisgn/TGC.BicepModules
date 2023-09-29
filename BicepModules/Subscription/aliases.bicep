@@ -3,6 +3,8 @@
 param subscriptionName string
 @description('Required. Provide the full resource ID of billing scope to use for subscription creation.')
 param billingScope string
+@description('Optional. Provide the display name of the subscription. Default is same as subscriptionName.')
+param displayName string = ''
 @description('Optional. Provide the ID of the associated Azure Management Group. Default is none.')
 param managementGroupId string = ''
 @description('Optional. Tags for the subscription. Default is none.')
@@ -13,7 +15,7 @@ resource subscriptionAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
   name: subscriptionName
   properties: {
     workload: 'Production'
-    displayName: subscriptionName
+    displayName: displayName == '' ? subscriptionName : displayName
     billingScope: billingScope
     additionalProperties: {
       managementGroupId: managementGroupId

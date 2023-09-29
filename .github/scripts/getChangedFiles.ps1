@@ -37,7 +37,7 @@ function DetectVersion()
         if($allACRPackages -contains $moduleName){
             Write-Host "Executing az acr repository show --name $acrName --repository $moduleName"
             $existingModule = (az acr repository show --name $acrName --repository $moduleName) | ConvertFrom-Json
-            Write-Host: "Exesitng version: v$($existingModule.tagCount)"
+            Write-Host "Existing version: v$($existingModule.tagCount)"
             $currentModuleVersion = $existingModule.tagCount
 
             $firstLine = Get-Content $source -First 1
