@@ -25,5 +25,6 @@ resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     principalId: servicePrincipalId
     principalType: principalType
     roleDefinitionId: roleDefinition.id
+    description: 'some value'
   }
 }
