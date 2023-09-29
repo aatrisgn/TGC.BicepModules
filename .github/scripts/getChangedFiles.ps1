@@ -8,6 +8,8 @@ param(
      [string]$acrName
 )
 
+$allACRPackages = az acr repository list --name $acrName | ConvertFrom-Json
+
 function CopyFiles{
     param( [string]$source )
     
@@ -32,22 +34,23 @@ function DetectVersion()
 
         Write-Host "Executing az acr repository show --name $acrName --repository 'bicep/modules/$($parts[-2].toLower())/$($lastValueWithoutExtension.toLower())'"
 
-        try{
-            $existingModule = (az acr repository show --name $acrName --repository "bicep/modules/$($parts[-2])/$lastValueWithoutExtension") | ConvertFrom-Json
+        $moduleName = "bicep/modules/$($parts[-2])/$lastValueWithoutExtension"
+        
+        if($allACRPackages -contains $moduleName){
+            $existingModule = (az acr repository show --name $acrName --repository $moduleName) | ConvertFrom-Json
             $existingModule
             $currentModuleVersion = $existingModule.tagCount
 
             $firstLine = Get-Content $source -First 1
             $buildNumber = $firstLine.substring($firstLine.Length -2)
 
-        } catch {
-            Write-Host "Could not locate any existing module"
-            return
-        }
+            if($currentModuleVersion -eq "v$buildNumber"){
+                throw "Module has changed but file version has not been updated."
+            }
 
-        if($currentModuleVersion -eq "v$buildNumber"){
-            throw "Module has changed but file version has not been updated."
-        }
+        } else {
+            Write-Host "Could not locate any existing module"
+        }        
     }
 }
 
