@@ -67,7 +67,7 @@ else {
     {       
         foreach ($change in $changes)
         { 
-            DetectVersion $changes
+            DetectVersion $change
             CopyFiles $change 
         }
     }
