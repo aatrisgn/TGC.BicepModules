@@ -1,4 +1,4 @@
-//version:v1
+//version:v2
 @description('Object ID of the the principal you want to assign a role.')
 param servicePrincipalId string
 
@@ -12,6 +12,7 @@ param roleId string
   'User'])
 @description('Optional. Default is \'ServicePrincipal\'. Type of principal the role should be assigned.')
 param principalType string = 'ServicePrincipal'
+
 
 resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   scope: resourceGroup()

@@ -8,12 +8,18 @@ param(
 
 function CopyFiles{
     param( [string]$source )
+    
     $filePath = "$targetDirectory/$source"
     [Void] (New-Item -Force $filePath)
     Copy-Item $source "$targetDirectory/$source" -Force
 }
 
-$changes = Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
+function DetectVersion()
+{
+
+}
+
+$changes = git diff --name-only -- '*.bicep' --relative HEAD HEAD~2 # Get-ChildItem $modulesDirectory -Filter "*.bicep" -Recurse
 
 Write-Host "Files detected for change: $changes"
 
