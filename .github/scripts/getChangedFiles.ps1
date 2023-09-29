@@ -33,13 +33,10 @@ function DetectVersion()
         Write-Host "Executing az acr repository show --name $acrName --repository 'bicep/modules/$($parts[-2].toLower())/$($lastValueWithoutExtension.toLower())'"
 
         $existingModule = (az acr repository show --name $acrName --repository "bicep/modules/$($parts[-2])/$lastValueWithoutExtension") | ConvertFrom-Json
-
-        $existingModule
-
-        $LastExitCode
         if (!$?) {
             Write-Host "Could not locate any existing module"
         } else {
+            $existingModule
             $currentModuleVersion = $existingModule.tagCount
 
             $firstLine = Get-Content $source -First 1
