@@ -1,5 +1,5 @@
 //version:v1
-@description('Name of the key vault.')
+@description('Required. Name of the key vault.')
 param name string
 
 @description('Optional. Location of the keyvault.')
