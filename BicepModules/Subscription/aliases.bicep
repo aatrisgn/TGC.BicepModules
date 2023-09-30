@@ -1,4 +1,4 @@
-//version: v3
+//version: v4
 @description('Required. Name of the new subscription.')
 param subscriptionName string
 @description('Required. Provide the full resource ID of billing scope to use for subscription creation.')
@@ -10,7 +10,7 @@ param managementGroupId string = ''
 @description('Optional. Tags for the subscription. Default is none.')
 param tags object = {}
 
-targetScope =  'managementGroup'
+targetScope =  'tenant'
 
 resource subscriptionAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
   scope: tenant()
